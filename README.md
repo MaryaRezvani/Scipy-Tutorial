@@ -54,10 +54,6 @@ task using sckit-learn models to complex ensemble methods and preprocessing pipe
     - [Base Estimator:the Foundation](#Base-Estimator:the-Foundation)
 
 
-
-
-
-
 ## Core Components of the Estimator Interface
 the Estimator Interface in sckit-learn is designed to provide a consistent and intuative way to 
 interact with machine learning models. Underestanding its core components is essential for effectively 
@@ -115,6 +111,7 @@ Estimators have various attributes that provide information about the model:
 + Learned parameter attributes: Available after fitting(e.g., linear_model.coef_)
 + Metadata attributes: Provide information about the model(e.g., feature_names_in_)
 
+
 ## Example:Putting it all together
 Let's look at an exampple that demonstrates these components working together:
 ```python
@@ -155,6 +152,7 @@ together to create the diverse range of estimators available in sckit_learn.
 
 The Architecture of sckit-learns estimators is built on a foundation of inheritance and composition,
 allowing for code reuse, consistency and extensibility.
+
 ## Base Estimator:the Foundation
 `BaseEstimator` is the base class for all estimators in sckit-learn. It provides common functionality 
 that all estimatore share:
