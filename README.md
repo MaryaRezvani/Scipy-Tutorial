@@ -261,3 +261,64 @@ each mixin provides specific methods:
 <img src="./utils/class.png"/>
 
 This diagram illustrates how concrete estimator classes (e.g., Classifier, Transformer) inherit from both BaseEstimator and specific mixin classes.
+
+## Implementing a Custom Estimator with Mixin
+Let's Create a Custom Classifier that utilizes both `BaseEstimator` and `ClassifierMixin` :
+
+```python
+from sklearn.base import BaseEstimator, ClassifierMixin
+from sklearn.utils.validation import check_X_y, check_array, check_is_fitted
+from sklearn.utils.multiclass import unique_labels
+import numpy as np
+
+
+class SimpleThresholdClassifier(BaseEstimator, ClassifierMixin):
+    def __init__(self, threshold=0.5):
+        self.threshold = threshold
+    
+    def fit(self, X, y):
+        # check that x and y have correct shape
+        X, y = check_X_y(X, y)
+        # store the classes seen during fit
+        self.classes_ = unique_labels(y)
+
+        # store the first featur's threshold for each class
+        self.threshold = {}
+        for c in self.classes_:
+        self.thresholds_[c] = np.mean(X[y == c, 0])
+
+        #return the classifier
+        return self
+    
+    def predict(self, X):
+        #Check if fit has been called
+        check_is_fitted(self)
+
+        #input validation
+        X = check_array(X)
+
+        #predict class based on wether X's first features exceeds the threshold
+        return np.array([self.classes_[1] if x[0] > self.threshold else self.classes_[0] for x in X])
+```
+```python
+#Usage
+clf = SimpleThresholdClassifier(threshold=0.6)
+x = np.array([[0.1], [0.5], [0.7], [0.9]])
+y = np.array([0, 0, 1, 1])
+clf.fit(X,y)
+```
+```python
+clf.predict([[0.55], [0.85]])
+```
+
+```python
+clf.score(X, y)
+```
+In this example, `SimpleThresholdClassifier` inherits from both `BaseEstimator` and
+`ClassifierMixin`. It gets the basic estimator functionality from `BaseEstimator` and the `score()`
+method from `ClassifierMixin`.
+
+## The Benifits of This Architecture
+
+
+## Meta-Estimators and Composite Estimators
