@@ -52,6 +52,10 @@ task using sckit-learn models to complex ensemble methods and preprocessing pipe
     - [Example: Putting it all together](#Example-Putting-it-all-together)
 - [Architecture of Base Estimator and Derived Classes](#Architecture-of-Base-Estimator-and-Derived-Classes)
     - [Base Estimator: the Foundation](#Base-Estimator-the-Foundation)
+    - [Mixin Classes: Adding Specific Behaviors](#Mixin-Classes-Adding-Specific-Behaviors)
+    - [Implementing a Custom Estimator with Mixin](#Implementing-a-Custom-Estimator-with-Mixin)
+    - [The Benifits of This Architecture](#The-Benifits-of-This-Architecture)
+    - [Meta-Estimators and Composite Estimators](#Meta-Estimators-and-Composite-Estimators)
 
 
 ## Core Components of the Estimator Interface
@@ -178,3 +182,82 @@ print(my_estimator.get_params()) #Automatically gets all parameters
 
 ```
 > 💡 **Pro Tip:** When creating custom estimators, always inherit from `BaseEstimator` to ensure compatibility with scikit-learn's ecosystem.
+
+## Mixin Classes: Adding Specific Behaviors
+Sckit-learn uses Mixin classes to add Specific behaviors to estimators.
+common mixin include:
++ Classifier Mixin: for classification algorithms
++ RegressorMixin: for regression algorithms
++ TransformerMixin: for data transformation algorithms
++ ClusterMixin: for clustering algorithms
+
+These mixins often provide default implementations of certain methods. for example,
+`TransformerMixin` provides a default `fit_transform()` method.
+
+```python
+from sklearn.base import BaseEstimator, TransformerMixin
+
+class MyCustomTransformer(BaseEstimator, TransformerMixin):
+    def fit(self, X, y=None):
+        return self
+    
+    def transform(self, X):
+        # Implement transformation logic here
+        return X
+# now MyCustomTransformer has a fit_transform() method automatically
+
+```
+Here's an overview of BaseEstimator and key mixin classes, along with their primary
+methods:
+
+    BaseEstimator
+    ├── get_params()
+    ├── set_params()
+    └── __repr__()
+    |
+    ├── ClassifierMixin
+    ├── score()
+    └── predict_proba() [optional]
+    |
+    ├── RegressorMixin
+    └── score()
+    |
+    ├── TransformerMixin
+    └── fit_transform()
+    |
+    ├── ClusterMixin
+    ├── fit_predict()
+    └── fit_transform()
+    |
+    ├── OutlierMixin
+    └── fit_predict()
+
+each mixin provides specific methods:
+
+1. **ClassifierMixin**
+
+    + score(X, y): Returns the mean accuracy on the given test data and labels.
+
+    + predict_proba(X): (Optional) Returns probability estimates for samples.
+
+2. **RegressorMixin**
+
+    + score(X, y): Returns the coefficient of determination R² of the prediction.
+
+3. **TransformerMixin**
+
+    + fit_transform(X, y=None): Fits transformer to X and y, and returns transformed version of X.
+
+4. **ClusterMixin**
+
+    + fit_predict(X, y=None): Performs clustering on X and returns cluster labels.
+
+    + fit_transform(X, y=None): Fits to X, transforms X, and returns transformed X.
+
+5. **OutlierMixin**
+
+    + fit_predict(X, y=None): Performs outlier detection on X and returns labels.
+
+<img src="./utils/class.png"/>
+
+This diagram illustrates how concrete estimator classes (e.g., Classifier, Transformer) inherit from both BaseEstimator and specific mixin classes.
