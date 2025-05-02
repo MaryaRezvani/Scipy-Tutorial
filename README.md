@@ -49,9 +49,9 @@ task using sckit-learn models to complex ensemble methods and preprocessing pipe
     - [Learned parameters](#Learned-parameters)
     - [Methods](#Methods)
     - [Attributes](#Attributes)
-    - [Example:Putting it all together](#Example:Putting-it-all-together)
+    - [Example: Putting it all together](#Example-Putting-it-all-together)
 - [Architecture of Base Estimator and Derived Classes](#Architecture-of-Base-Estimator-and-Derived-Classes)
-    - [Base Estimator:the Foundation](#Base-Estimator:the-Foundation)
+    - [Base Estimator: the Foundation](#Base-Estimator-the-Foundation)
 
 
 ## Core Components of the Estimator Interface
@@ -112,7 +112,7 @@ Estimators have various attributes that provide information about the model:
 + Metadata attributes: Provide information about the model(e.g., feature_names_in_)
 
 
-## Example:Putting it all together
+## Example: Putting it all together
 Let's look at an exampple that demonstrates these components working together:
 ```python
 from sklearn.ensemble import RandomForestClassifier
@@ -153,7 +153,7 @@ together to create the diverse range of estimators available in sckit_learn.
 The Architecture of sckit-learns estimators is built on a foundation of inheritance and composition,
 allowing for code reuse, consistency and extensibility.
 
-## Base Estimator:the Foundation
+## Base Estimator: the Foundation
 `BaseEstimator` is the base class for all estimators in sckit-learn. It provides common functionality 
 that all estimatore share:
 + Automatic get/set of parameters
