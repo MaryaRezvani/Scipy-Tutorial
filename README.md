@@ -56,6 +56,8 @@ task using sckit-learn models to complex ensemble methods and preprocessing pipe
     - [Implementing a Custom Estimator with Mixin](#Implementing-a-Custom-Estimator-with-Mixin)
     - [The Benifits of This Architecture](#The-Benifits-of-This-Architecture)
     - [Meta-Estimators and Composite Estimators](#Meta-Estimators-and-Composite-Estimators)
+- [ Commom Methods in Estimators](#Commom-Methods-in-Estimators)
+    - [The fit() Model](#The-fit()-Model)
 
 
 ## Core Components of the Estimator Interface
