@@ -386,7 +386,7 @@ allowing for unified workflow regardless of the specific algorithm being used.
 
 Mastering these common methods will enable you to work efficiently with any estimator in 
 sckit-learn, streamlining your machine learning workflow.
-### The fit() Method
+## The fit() Method
 The fit() Method is the cornerstone of all estimators. It's used to train the model on your data.
 estimator.fit(X, y)
 - X: The input featurs (typically a 2D array-like object)
@@ -411,7 +411,7 @@ dt_classifier.fit(X, y)
 print(f"Model trained on {dt_classifier.n_featurs_in_} features")
 ```
 
-### The predict() Method
+## The predict() Method
 For supervised learning estimators, predict() is used to make predictions
 on new data.
 y_pred = estimator.predict(X)
@@ -429,7 +429,7 @@ for i, pred in enumerate(predictions):
     print(f"Sample {i+1}: Predicted class {pred}")
 
 ```
-### The transform() Method
+## The transform() Method
 The transform() method is primarily used by preprocessing estimators and feature 
 selection algorithms to modify or reduce the input data.
 
@@ -462,7 +462,7 @@ Example with our Decision Tree Classifier:
 accuracy = dt_classifier.score(X, y)
 print(f"Model accuracy on training data: {accuracy:.2f}")
 ```
-### PuttIng It All Together
+## PuttIng It All Together
 Let's use these methods in a complete example:
 ```python
 from sklearn.model_selection import train_test_split
