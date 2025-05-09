@@ -57,10 +57,10 @@ task using sckit-learn models to complex ensemble methods and preprocessing pipe
     - [The Benifits of This Architecture](#The-Benifits-of-This-Architecture)
     - [Meta-Estimators and Composite Estimators](#Meta-Estimators-and-Composite-Estimators)
 - [Commom Methods in Estimators](#Commom-Methods-in-Estimators)
-    - [The fit() Method](#The-fit()-Method)
-    - [The predict() Method](#The-predict()-Method)
-    - [The transform() Method](#The-transform()-Method)
-    - [The score() Method](#The-score()-Method)
+    - [The fit() Method](#The-fit-()-Method)
+    - [The predict() Method](#The-predict-()-Method)
+    - [The transform() Method](#The-transform-()-Method)
+    - [The score() Method](#The-score-()-Method)
     - [PuttIng It All Together](#PuttIng-It-All-Together)
 
 
