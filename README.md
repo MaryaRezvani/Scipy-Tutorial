@@ -56,11 +56,12 @@ task using sckit-learn models to complex ensemble methods and preprocessing pipe
     - [Implementing a Custom Estimator with Mixin](#Implementing-a-Custom-Estimator-with-Mixin)
     - [The Benifits of This Architecture](#The-Benifits-of-This-Architecture)
     - [Meta-Estimators and Composite Estimators](#Meta-Estimators-and-Composite-Estimators)
-- [ Commom Methods in Estimators](#Commom-Methods-in-Estimators)
+- [Commom Methods in Estimators](#Commom-Methods-in-Estimators)
     - [The fit() Method](#The-fit()-Method)
-    - [The Predict() Method](#The_Predict()_Method)
-    - [The score() Method](#The_score()_Method)
-    - [PuttIng It All Together](#PuttIng_It_All_Together)
+    - [The predict() Method](#The-predict()-Method)
+    - [The transform() Method](#The-transform()-Method)
+    - [The score() Method](#The-score()-Method)
+    - [PuttIng It All Together](#PuttIng-It-All-Together)
 
 
 ## Core Components of the Estimator Interface
@@ -410,7 +411,7 @@ dt_classifier.fit(X, y)
 print(f"Model trained on {dt_classifier.n_featurs_in_} features")
 ```
 
-## The Predict() Method
+### The predict() Method
 For supervised learning estimators, predict() is used to make predictions
 on new data.
 y_pred = estimator.predict(X)
@@ -428,7 +429,7 @@ for i, pred in enumerate(predictions):
     print(f"Sample {i+1}: Predicted class {pred}")
 
 ```
-## The transform() Method
+### The transform() Method
 The transform() method is primarily used by preprocessing estimators and feature 
 selection algorithms to modify or reduce the input data.
 
@@ -450,7 +451,7 @@ X_reduced = pca.transform(X)
 print(f"Original shape:{X.shape}")
 print(f"Transformed shape: {X_reduced.shape}")
 ```
-## The Score() Method
+### The Score() Method
 The score() methods provides a quick way evaluate the performance of a model.
 score = estimator.score(X, y)
 - for classifiers: Usually returns the mean accuracy
@@ -461,7 +462,7 @@ Example with our Decision Tree Classifier:
 accuracy = dt_classifier.score(X, y)
 print(f"Model accuracy on training data: {accuracy:.2f}")
 ```
-## PuttIng It All Together
+### PuttIng It All Together
 Let's use these methods in a complete example:
 ```python
 from sklearn.model_selection import train_test_split
