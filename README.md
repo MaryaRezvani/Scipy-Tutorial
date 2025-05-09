@@ -407,3 +407,86 @@ dt_classifier.fit(X, y)
 print(f"Model trained on {dt_classifier.n_featurs_in_} features")
 ```
 
+## The Predict() Method
+For supervised learning estimators, predict() is used to make predictions
+on new data.
+y_pred = estimator.predict(X)
+- X: The input features for which you want predictions
+
+Example continuing from the previous Decision Tree:
+
+```python
+# make predictions on the first 5 samples
+new_samples = X[:5]
+predictions = dt_classifier.predict(new_samples)
+
+print("Predictions for the first 5 samples:")
+for i, pred in enumerate(predictions):
+    print(f"Sample {i+1}: Predicted class {pred}")
+
+```
+## The transform() Method
+The transform() method is primarily used by preprocessing estimators and feature 
+selection algorithms to modify or reduce the input data.
+
+X_transformed = estimator.transform(X)
+
+Example using Principal Component Analysis(PCA):
+
+```python 
+from sklearn.decomposition import PCA
+
+#Create and fit PCA
+pca = PCA(n_components = 2)
+pca.fit(X)
+
+# transform the data
+X_reduced = pca.transform(X)
+```
+```python
+print(f"Original shape:{X.shape}")
+print(f"Transformed shape: {X_reduced.shape}")
+```
+## The Score() Method
+The score() methods provides a quick way evaluate the performance of a model.
+score = estimator.score(X, y)
+- for classifiers: Usually returns the mean accuracy
+- for regressors: Usually returns the R-squared score
+
+Example with our Decision Tree Classifier:
+```python
+accuracy = dt_classifier.score(X, y)
+print(f"Model accuracy on training data: {accuracy:.2f}")
+```
+## PuttIng It All Together
+Let's use these methods in a complete example:
+```python
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.svm import SVC
+from sklearn.pipeline import make_pipeline
+
+#Split the data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+#Create a pipeline
+pipeline = make_pipeline(StandardScaler(), SVC())
+
+#Fit the pipeline
+pipeline.fit(X_train, y_train)
+
+#Make Predictions
+y_pred = pipeline.predict(X_test)
+
+#Evaluate the Model
+score = pipeline.score(X_test, y_test)
+print(f"Model accuracy on test data: {score:.2f}")
+
+```
+**Important Note:** While these methods are common across many estimators, always
+check the documentation for any estimator specific behavior or additional methods 
+that might be available.
+
+By mastering these common methods, you'll be able to work effectively with a wide 
+range of sckit-learn estimators, from simple preprocessing steps to complex ensemble models.
+This Consistency in the API is what makes sckit-learn so powerful and user-friendly for machine learning tasks.
