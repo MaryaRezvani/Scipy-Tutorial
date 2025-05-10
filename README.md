@@ -494,3 +494,42 @@ that might be available.
 By mastering these common methods, you'll be able to work effectively with a wide 
 range of sckit-learn estimators, from simple preprocessing steps to complex ensemble models.
 This Consistency in the API is what makes sckit-learn so powerful and user-friendly for machine learning tasks.
+
+## Types of Estimators
+Sckit-learn provides a diverse range of estimators to tackle various machine learning tasks.
+Understanding the different types of estimators and their purposes is crucial
+for selecting the right tool for your specific problem. In this section, we'll explore the main categories of estimators in sckit-learn and their typical use cases.
+
+Sckit-learn estimators are broadly categorized based on their primary function in the machine learning workflow, such as supervised learning, unsupervised learning, and feature manipulation.
+
+## Supervised learning Estimators
+Supervised learning estimators are used when we have labeled data and want to predict a target variable.
+They can be futher divided into two main categories:
+
+## Classifiers
+Classifiers are used for predicting categorical outcomes. Some popular classifiers in sckit-learn include:
+- LogisticRegression
+- RandomForestClassifier
+- SVC(Support Vector Classifier)
+- KNeighborsClassifier
+
+Example using a Random Forest Classifier:
+
+```python
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
+
+# Create a synthetic classification dataset
+X, y = make_classification(n_samples=1000, n_features=20, n_classes=2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+#Create and train classifier
+rf_classifier = RandomForestClassifier(n_estimators=100, random_state=42)
+rf_classifier.fit(X_train, y_train)
+
+#Make a prediction 
+new_X = [[2.5]]
+prediction = linear_reg.predict(new_X)
+print(f"Prediction for X=2.5:{prediction[0]:.2f}")
+```
