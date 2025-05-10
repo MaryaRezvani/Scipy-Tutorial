@@ -62,6 +62,18 @@ task using sckit-learn models to complex ensemble methods and preprocessing pipe
     - [The transform() Method](#The-transform-Method)
     - [The score() Method](#The-score-Method)
     - [PuttIng It All Together](#PuttIng-It-All-Together)
+- [Types of Estimators](#types-of-estimators)
+    - [Supervised Learning Estimators](#supervised-learning-estimators)
+        - [Classifiers](#classifiers)
+        - [Regressors](#Regressors)
+    - [UnSupervised Learning Estimators](#unsupervised-learning-estimators)
+        - [Clustering Algorithms](#clustering-algorithms)
+        - [Dimensionality Reduction](#dimensionality-reduction)
+    - [Transformer Estimators](#transformer-estimators)
+        - [Preprocessors](#feature-selection)
+        - [Feature Selection](#feature-selection)
+    - [Meta-Estimators](#meta-estimators)
+- [Summery](#summery)
 
 
 ## Core Components of the Estimator Interface
@@ -533,3 +545,158 @@ new_X = [[2.5]]
 prediction = linear_reg.predict(new_X)
 print(f"Prediction for X=2.5:{prediction[0]:.2f}")
 ```
+## Regressors
+Regressors are used for predicting continuous numerical outcomes. Some common regressors include:
+- Linear Regression
+- Random Forest Regressor
+- SVR(Support Vector Regressor)
+- GradientBoostingRegressor
+
+Example using a linear Regression model:
+```python 
+from sklearn.linear_model import LinearRegression
+from sklearn.datasets import make_regressiion
+
+#Create a synthetic regression dataset
+X, y = make_regression(n_samples=100, n_features=1, noise=10, random_state=42)
+
+#Create and train the regressor
+linera_reg = LinearRegression()
+linera_reg.fit(X, y)
+
+#Make a prediction
+new_X = [[2.5]]
+prediction = linear_reg.predict(new_X)
+print(f"Prediction for X=2.5:{prediction[0]:.2f}")
+```
+
+## Unsupervised learning Estimators
+Unsupervised learning estimators work with unlabeled data to discover patterns or structure.
+Main categories include:
+
+## Clustering Algorithms
+Clustering algorithms group similar data points together. Examples include:
+- KMeans
+- DBSCAN
+- AgglomerativeClustering
+
+Example using K-Means clustering:
+```python
+from sklearn.cluster import KMeans
+from sklearn.datasets import make_blobs
+import matplotlib.pyplot as plt
+
+#Create a synthetic clustering dataset
+X, _ = make_blobs(n_samples=300, centers=4, cluster_std=0.60, random_state=42)
+#Create and fit the clustering model
+kmeans = KMeans(n_clusters=4, random_state=42)
+kmeans.fit(X)
+
+#Visualize the dataset
+plt.scatter(X[:, 0], X[:, 1], cmap='viridis', c=kmeans.labels_)
+plt.show()
+
+```
+```python
+#get cluster assignments
+cluster_labels = kmeans.labels_
+print(f"Number of points in each cluster: {[sum(cluster_labels == i) for i in range(4)]}")
+```
+## Dimensionality Reduction
+These estimators reduce the number of features in the dataset while preserving important information.
+Examples include:
+- PCA(Principal Component Analysis)
+- TruncatedSVD
+- TSNE
+
+Example Using PCA:
+```python
+from sklearn.decomposition import PCA
+from sklearn.datasets import load_digits
+
+#load the digits dataset
+digits = load_digits()
+X = digits.data
+
+#Create and fit PCA
+pca = PCA(n_components=2)
+X_reduced = pca.fit_transform(X)
+
+print(f"Original shape:{X.shape}")
+print(f"Reduced shape:{X_reduced.shape}")
+print(f"Explained variance ratio: {pca.explained_variance_ratio_}")
+
+```
+## Transformer Estimators
+Transformers modify or preprocess the input data. They include:
+
+## Preprocessors
+These estimators prepare the data for modeling. Examples include:
+- StandardScaler
+- MinMaxScaler
+- OneHotEncoder
+
+## Feature Selection
+These estimators select the most relevant features. Examples include:
+- SelectKBest
+- RFE(Recursive Feature Elimination)
+
+Example combining preprocessing and feature selection:
+```python
+from sklearn.preprocessing import StandardScaler
+from sklearn.feature_selection import SelectKBest, f_classif
+from sklearn.pipeline import make_pipeline
+from sklearn.datasets import load_breast_cancer
+
+#load the breast cancer dataset
+X, y = load_breast_cancer(return_X_y=True)
+
+#create a pipeline with preprocessing and features selection
+pipeline = make_pipeline(
+    StandardScalar(),
+    SelectKBest(f_classif, k=10)
+)
+#Fit and transform the data
+X_processed = pipeline.fit_transform(X, y)
+
+print(f"Original number of features: {X.shape[1]}")
+print(f"Number of featurs after selection: {X_processed.shape[1]}")
+```
+## Meta Estimators
+Meta-estimators combine or enhance other estimators. They include:
+- Pipeline: Chains multiple estimators
+- GridSearchCV: Performs hyperparameter tuning
+- VotingClassifier: Combine multiple classifiers
+
+Example using GridSearchCV:
+```python
+from sklearn.model_selection import GridSearchCV
+from sklearn.svm import SVC
+
+#Define the parameter grid
+param_grid = {'C': [0.1, 1, 10], 'kernel':['rbf', 'linear']}
+
+#Create the Grid Search Object
+grid_search = GridSearchCV(SVC(), param_grid, cv=5)
+
+#Fit the grid search
+grid_search.fit(X_train, y_train)
+
+print(f"Best parameters:{grid_search.best_params_}")
+print(f"Best cross-validation score: {grid_search.best_score_}")
+
+```
+**Why this Matters:** Understanding the different types of estimatora allows you to choose the most appropriate tool for your specific machine learning task. It also helps in constructing effective pipelines that combine various estimators for end-to-end machine-learning solutions.
+
+**Pro Tip:** Expriment with different types of estimators for your problem. Sometimes, a simpler model like 
+logistic regression might outperform more complex models, depending on your data and problem characteristics.
+
+By familiarizing yourself with these different type of estimators, you'll be well-equipped to tackle a wide range of machine learning problems using sckit-learn. Remember that the consistency of the estimator API across these different types makes it easy to switch between them and expriment with various approaches.
+
+## Summery
+As we conclude our exploration of the estimator API in sckit-learn, let's recap the key points and reflect on their significance in your machine learning journey.
+Let's review the key points:
+1. Unified Interface:
+2. Core Components:
+3. Common Methods:
+4. Diverse Estimator Types:
